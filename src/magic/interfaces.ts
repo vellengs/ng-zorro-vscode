@@ -36,6 +36,7 @@ export interface Directive {
 }
 
 export interface DirectiveProperty {
+  _common?: boolean;
   /**
    * Property name, e.g: `nzType`
    */

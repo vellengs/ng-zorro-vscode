@@ -5,6 +5,7 @@ const yamlFront = require('yaml-front-matter');
 
 import { Directive, DirectiveProperty, InputAttrType } from '../../../src/magic/interfaces';
 import { AST, AST_KEYS } from './ast';
+import { OVERRIDE } from './override';
 
 const COG = {
   /** 额外有效组件名清单 */
@@ -23,7 +24,15 @@ const COG = {
   INVALID_COMPONENTS: {
     'nz-tr': 'tr'
   },
-  MERGE_PROPERTIES: {
+  /** 找回未设定的组件名，`key` 文件路径 */
+  LOSE_COMPONENT_NAMES: {
+    'tooltip': '[nz-tooltip]'
+  },
+  COMMON_PROPERTIE_COMPONENTS: ['tooltip'],
+  COMMON_PROPERTIES: {
+    'nz-tooltip': { 'zh': '共同的 API', 'en': 'Common API' },
+    'nz-popconfirm': { component: 'nz-tooltip', 'zh': '共同的 API', 'en': 'Common API' },
+    'nz-popover': { component: 'nz-tooltip', 'zh': '共同的 API', 'en': 'Common API' },
     'nz-date-picker': { 'zh': '共同的 API', 'en': 'Common API' },
     'nz-year-picker': { 'zh': '共同的 API', 'en': 'Common API' },
     'nz-month-picker': { 'zh': '共同的 API', 'en': 'Common API' },
@@ -33,18 +42,29 @@ const COG = {
 };
 const md = new MarkdownIt();
 let ast: AST;
+const processRes: Directive[] = [];
 
 export function makeObject(lang: string, filePaths: string[]): Directive[] {
+  processRes.length = 0;
   const zone = lang.split('-').shift();
-  const res = [];
-  filePaths.forEach(p => {
-    const content = fs.readFileSync(p).toString();
-    const meta = yamlFront.loadFront(content);
-    meta.md = md.parse(meta.__content, {});
-    delete meta.__content;
-    res.push(...metaToItem(zone, p, meta));
-  });
-  return res;
+  filePaths
+    // 优先处理包含公共属性的组件文件
+    .map(p => ({ p, s: COG.COMMON_PROPERTIE_COMPONENTS.find(k => p.includes(k)) ? 9999 : 10 }))
+    .sort((a, b) => b.s - a.s)
+    .map(i => i.p)
+    .forEach(p => {
+      const content = fs.readFileSync(p).toString();
+      const meta = yamlFront.loadFront(content);
+      const lostKey = Object.keys(COG.LOSE_COMPONENT_NAMES).find(k => p.includes(k));
+      if (lostKey) {
+        // 找回未设定的组件名，强制插入相应的代码
+        meta.__content = meta.__content.replace('## API', `## API\n\n### ${COG.LOSE_COMPONENT_NAMES[lostKey]}`)
+      }
+      meta.md = md.parse(meta.__content, {});
+      delete meta.__content;
+      processRes.push(...metaToItem(zone, p, meta));
+    });
+  return processRes;
 }
 
 function getLibary(filePath: string) {
@@ -128,10 +148,20 @@ function getDirective(): Directive[] {
         checkType(item);
       }
       // merge properties
-      if (COG.MERGE_PROPERTIES[item.selector]) {
-        const commonHeading = COG.MERGE_PROPERTIES[item.selector][ast.zone];
-        const commonIdx = ast.offsetAt(commonHeading);
-        const commonProperties = getProperties(ast.getTable(commonIdx, false));
+      const mergeCog = COG.COMMON_PROPERTIES[item.selector];
+      if (mergeCog) {
+        let commonProperties: DirectiveProperty[];
+        // component
+        if (mergeCog.component) {
+          commonProperties = processRes.find(w => w.selector === mergeCog.component).properties;
+        } else {
+          const commonHeading = mergeCog[ast.zone];
+          const commonIdx = ast.offsetAt(commonHeading);
+          commonProperties = getProperties(ast.getTable(commonIdx, false)).map(i => {
+            i._common = true;
+            return i;
+          });
+        }
         item.properties = commonProperties.concat(...item.properties);
       }
       // fix description
@@ -159,7 +189,9 @@ function getProperties(data: string[][]): DirectiveProperty[] {
 function genPropertyItem(data: string[]): DirectiveProperty {
   if (COG.INGORE_PROPERTIES.includes(data[0])) return null;
   const nameMatch = data[0].trim().match(/((?:\[|\(|\[\()[\-a-zA-Z]+(?:\)\]|\]|\)))/g);
-  if (nameMatch.length === 0) return null;
+  if (nameMatch == null || nameMatch.length === 0) return null;
+  // ingore includes `Deprecated` in description
+  if (data[1].trim().includes('Deprecated')) return null;
 
   const item: DirectiveProperty = {
     name: nameMatch[0],
@@ -171,75 +203,21 @@ function genPropertyItem(data: string[]): DirectiveProperty {
   };
 
   // name
-  if (item.name.startsWith('[')) {
+  if (item.name.startsWith('[(')) {
+    item.name = cleanTag(item.name, '[(');
+    item.inputType = InputAttrType.InputOutput;
+  } else if (item.name.startsWith('[')) {
     item.name = cleanTag(item.name, '[');
   } else if (item.name.startsWith('(')) {
     item.name = cleanTag(item.name, '(');
     item.inputType = InputAttrType.Output;
-  } else if (item.name.startsWith('[(')) {
-    item.name = cleanTag(item.name, '[(');
-    item.inputType = InputAttrType.InputOutput;
   } else if (item.name.startsWith('#')) {
     item.name = item.name.substr(1);
     item.inputType = InputAttrType.Template;
   }
+
   // type
-  let types: any = item.typeRaw;
-  if (types.startsWith('Enum')) {
-    types = cleanTag(types.substr(4), '{');
-  }
-  types = types.split(~types.indexOf(',') ? ',' : '丨')
-    .map(v => cleanTag(v))
-    .map(v => cleanSemicolon(v));
-  const firstType = types.length > 0 ? types[0].split(' ').shift() : '';
-
-  if (firstType.startsWith('TemplateRef')) {
-    item.type = 'TemplateRef';
-  } else if (firstType.startsWith('(')) {
-    item.type = 'function';
-  } else if (firstType.startsWith('{')) {
-    item.type = 'object';
-  } else if (firstType.startsWith('EventEmitter')) {
-    item.type = 'EventEmitter';
-  } else if (firstType.startsWith('Array')) {
-    item.type = 'Array';
-  } else if (firstType.startsWith('Enum')) {
-    item.type = 'Enum';
-  } else {
-    switch (firstType) {
-      case 'boolean':
-        item.type = 'boolean';
-        break;
-      case 'number':
-        item.type = 'number';
-        break;
-      case 'Date':
-        item.type = 'Date';
-        break;
-      case 'HTMLElement':
-        item.type = 'HTMLElement';
-        break;
-    }
-  }
-
-  // type definition
-  if (
-    item.type === 'Enum' ||
-    (item.type === 'string'
-      && types.length > 1
-      && !types.includes('any')
-      && !types.includes('string')
-      && !types.includes('EventEmitter')
-      && !types.includes('HTMLElement'))
-  ) {
-    if (item.type === 'Enum') {
-
-    }
-    item.typeDefinition = types
-      .filter(value => !!value)
-      .filter(value => value !== 'null')
-      .map(value => ({ value, label: value }));
-  }
+  parseType(item);
 
   // default
   if (['`-`', '-', '`无`', '无'].includes(item.default)) {
@@ -259,6 +237,72 @@ function genPropertyItem(data: string[]): DirectiveProperty {
   if (!/^[-a-zA-Z0-9]+$/.test(item.name)) return null;
 
   return item;
+}
+
+function parseType(item: DirectiveProperty) {
+  let types: any = item.typeRaw;
+  // fix `Enum{}`
+  if (types.startsWith('Enum') || types.startsWith('Enum ')) {
+    types = cleanTag(types.substr(types.startsWith('Enum ') ? 5 : 4), '{');
+  }
+  // split mulit type
+  types = types.split(~types.indexOf('丨') ? '丨' : ~types.indexOf('|') ? '|' : ',')
+    .map(v => cleanTag(v))
+    .map(v => cleanSemicolon(v));
+
+  // get first type
+  const firstType = types.length > 0 ? types[0].split(' ').shift() : '';
+
+  if (firstType.startsWith('TemplateRef')) {
+    item.type = 'TemplateRef';
+  } else if (firstType.startsWith('(') || firstType.startsWith('function')) {
+    item.type = 'function';
+  } else if (firstType.startsWith('{')) {
+    item.type = 'object';
+  } else if (firstType.startsWith('EventEmitter')) {
+    item.type = 'EventEmitter';
+  } else if (firstType.startsWith('Array')) {
+    item.type = 'Array';
+  } else if (firstType.startsWith('Enum')) {
+    item.type = 'Enum';
+  } else {
+    switch (firstType) {
+      case 'boolean':
+      case 'Boolean':
+        item.type = 'boolean';
+        break;
+      case 'number':
+      case 'Number':
+        item.type = 'number';
+        break;
+      case 'date':
+      case 'Date':
+        item.type = 'Date';
+        break;
+      case 'HTMLElement':
+        item.type = 'HTMLElement';
+        break;
+    }
+  }
+
+  // type definition
+  item.typeDefinition = [];
+  if (
+    item.type === 'Enum' ||
+    (
+      item.type === 'string'
+      && types.length > 1
+      && !types.includes('any')
+      && !types.includes('string')
+      && !types.includes('EventEmitter')
+      && !types.includes('Element')
+    )
+  ) {
+    // `'horizontal'丨'vertical'丨'inline'`
+    item.typeDefinition = types
+      .filter(value => !!value)
+      .filter(value => value !== 'null');
+  }
 }
 
 function cleanTag(text: string, tag = '`'): string {
@@ -307,6 +351,16 @@ function metaToItem(zone: string, filePath: string, meta: any): Directive[] {
     }
     i.whenToUse = whenToUse;
     i.doc = url;
+    // override type definition
+    i.properties.forEach(p => {
+      if (OVERRIDE.typeDefinition[i.selector]) {
+        p.typeDefinition = OVERRIDE.typeDefinition[i.selector][p.name] || p.typeDefinition;
+      }
+      if (p.typeDefinition.length > 0) {
+        p.type = 'Enum';
+      }
+    });
+
     return i;
   });
 }

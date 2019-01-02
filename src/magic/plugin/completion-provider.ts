@@ -12,7 +12,7 @@ import {
   Range,
 } from 'vscode';
 import { DirectiveProperty } from '../interfaces';
-import { query, getDirective } from '../resources';
+import { query, getDirective, CONFIG } from '../resources';
 import { getTag, typingPreChart } from '../utils';
 
 export default class implements CompletionItemProvider {
@@ -94,13 +94,18 @@ export default class implements CompletionItemProvider {
     let snippet = '';
     switch (property.type) {
       case 'string':
+      case 'Enum':
         if (property.typeDefinitionSnippetStr.length > 0) {
           snippet = `${property.name}="\${1|${property.typeDefinitionSnippetStr}|}"$0`;
         }
         break;
       case 'boolean':
-        snippet = `${property.name}="\${1|true,false|}"$0`;
+        snippet = `${property.name}="\${1|true,false${CONFIG.isAlain ? ',http.loading' : ''}|}"$0`;
         break;
+      case 'TemplateRef':
+        snippet = `[${property.name}]="\${1:${property.pureName}}Tpl"$0`;
+        break;
+      case 'Array':
       case 'function':
         snippet = `[${property.name}]="\${1:${property.pureName}}"$0`;
         break;
@@ -109,7 +114,7 @@ export default class implements CompletionItemProvider {
         break;
     }
     if (!snippet) {
-      snippet = `${property.name}="\${1:${property.default || property.pureName}}"$0`;
+      snippet = `${property.name}="\${1:${property.default.length > 0 ? property.default : property.pureName}}"$0`;
     }
 
     res.insertText = new SnippetString(snippet);

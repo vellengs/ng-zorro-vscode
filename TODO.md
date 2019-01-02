@@ -12,7 +12,7 @@
     - https://ng.ant.design/components/menu/zh
     - 忽略引用：https://ng.ant.design/components/form/zh
 - [x] 核实限制 API 范围数据 https://ng.ant.design/components/checkbox/zh
-- [ ] 可选值处理
+- [x] 可选值处理
     - https://ng.ant.design/components/input/zh
     - https://ng.ant.design/components/input/en
 - [x] 存在同个节点有多个组件

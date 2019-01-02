@@ -10,8 +10,7 @@ const LANGS = ['en-US', 'zh-CN'];
 
 const langFiles = getFiles(LANGS, buildPath);
 Object.keys(langFiles).forEach(l => {
-  // const files = langFiles[l].filter(w => w.includes('anchor'))
-  const files = langFiles[l].filter(w => w.includes('date-picker'));
+  const files = langFiles[l]; // .filter(w => w.includes('tooltip'));
   const res = makeObject(l, files);
   fs.writeFileSync(
     path.join(srcPath, l + '.json'),
