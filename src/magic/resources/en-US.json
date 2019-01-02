@@ -1,0 +1,849 @@
+[
+  {
+    "_idx": 255,
+    "type": "component",
+    "selector": "nz-date-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "Whether to show clear button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "get focus when component mounted",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "picker className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "custom rendering function for date cells (Not support by month-picker/year-picker)",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "determine whether the nz-date-picker is disabled",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "specify the date that cannot be selected (Not support by year-picker)",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "localization configuration",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "open state of picker",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "to customize the style of the popup calendar",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "to customize the className of the popup calendar",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "to customize the style of the input box",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "a callback emitter, can be executed whether the popup calendar is popped up or closed",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "Date",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzDisabledTime",
+        "inputType": 0,
+        "description": "to specify the time that cannot be selected",
+        "type": "function",
+        "typeRaw": "(current: Date) => { nzDisabledHours, nzDisabledMinutes, nzDisabledSeconds }",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "to set the date format, refer to [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM-dd\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "render extra footer in panel",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzShowTime",
+        "inputType": 0,
+        "description": "to provide an additional time selection",
+        "type": "string",
+        "typeRaw": "object / boolean",
+        "default": "[TimePicker Options](/components/time-picker/en#api)"
+      },
+      {
+        "name": "nzShowToday",
+        "inputType": 0,
+        "description": "whether to show \"Today\" button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "placeholder of date input",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzOnOk",
+        "inputType": 1,
+        "description": "callback when click ok button",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "Date change callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "DatePicker",
+    "description": "To select or input a date.",
+    "whenToUse": "By clicking the input box, you can select a date from a popup calendar.",
+    "doc": "https://ng.ant.design/components/date-picker/en"
+  },
+  {
+    "_idx": 404,
+    "type": "component",
+    "selector": "nz-year-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "Whether to show clear button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "get focus when component mounted",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "picker className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "custom rendering function for date cells (Not support by month-picker/year-picker)",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "determine whether the nz-date-picker is disabled",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "specify the date that cannot be selected (Not support by year-picker)",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "localization configuration",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "open state of picker",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "to customize the style of the popup calendar",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "to customize the className of the popup calendar",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "to customize the style of the input box",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "a callback emitter, can be executed whether the popup calendar is popped up or closed",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "Date",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "to set the date format, refer to [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "render extra footer in panel",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "placeholder of date input",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "Date change callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "DatePicker",
+    "description": "To select or input a date.",
+    "whenToUse": "By clicking the input box, you can select a date from a popup calendar.",
+    "doc": "https://ng.ant.design/components/date-picker/en"
+  },
+  {
+    "_idx": 497,
+    "type": "component",
+    "selector": "nz-month-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "Whether to show clear button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "get focus when component mounted",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "picker className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "custom rendering function for date cells (Not support by month-picker/year-picker)",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "determine whether the nz-date-picker is disabled",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "specify the date that cannot be selected (Not support by year-picker)",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "localization configuration",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "open state of picker",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "to customize the style of the popup calendar",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "to customize the className of the popup calendar",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "to customize the style of the input box",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "a callback emitter, can be executed whether the popup calendar is popped up or closed",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "Date",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "to set the date format, refer to [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "render extra footer in panel",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "placeholder of date input",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "Date change callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "DatePicker",
+    "description": "To select or input a date.",
+    "whenToUse": "By clicking the input box, you can select a date from a popup calendar.",
+    "doc": "https://ng.ant.design/components/date-picker/en"
+  },
+  {
+    "_idx": 590,
+    "type": "component",
+    "selector": "nz-week-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "Whether to show clear button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "get focus when component mounted",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "picker className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "custom rendering function for date cells (Not support by month-picker/year-picker)",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "determine whether the nz-date-picker is disabled",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "specify the date that cannot be selected (Not support by year-picker)",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "localization configuration",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "open state of picker",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "to customize the style of the popup calendar",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "to customize the className of the popup calendar",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "to customize the style of the input box",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "a callback emitter, can be executed whether the popup calendar is popped up or closed",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "Date",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "to set the date format, refer to [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-ww\""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "placeholder of date input",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "Date change callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "DatePicker",
+    "description": "To select or input a date.",
+    "whenToUse": "By clicking the input box, you can select a date from a popup calendar.",
+    "doc": "https://ng.ant.design/components/date-picker/en"
+  },
+  {
+    "_idx": 669,
+    "type": "component",
+    "selector": "nz-range-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "Whether to show clear button",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "get focus when component mounted",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "picker className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "custom rendering function for date cells (Not support by month-picker/year-picker)",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "determine whether the nz-date-picker is disabled",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "specify the date that cannot be selected (Not support by year-picker)",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "localization configuration",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "open state of picker",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "to customize the style of the popup calendar",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "to customize the className of the popup calendar",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "to customize the style of the input box",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "a callback emitter, can be executed whether the popup calendar is popped up or closed",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "Date",
+        "type": "string",
+        "typeRaw": "Date[]",
+        "default": ""
+      },
+      {
+        "name": "nzDisabledTime",
+        "inputType": 0,
+        "description": "to specify the time that cannot be selected",
+        "type": "function",
+        "typeRaw": "(current: Date, partial: 'start' / 'end') => { nzDisabledHours, nzDisabledMinutes, nzDisabledSeconds }",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "to set the date format",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM-dd\""
+      },
+      {
+        "name": "nzRanges",
+        "inputType": 0,
+        "description": "preseted ranges for quick selection",
+        "type": "object",
+        "typeRaw": "{ [ key: string ]: Date[] }",
+        "default": ""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "render extra footer in panel",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzShowTime",
+        "inputType": 0,
+        "description": "to provide an additional time selection",
+        "type": "string",
+        "typeRaw": "object / boolean",
+        "default": "[TimePicker Options](/components/time-picker/en#api)"
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "placeholder of date input",
+        "type": "string",
+        "typeRaw": "string[]",
+        "default": ""
+      },
+      {
+        "name": "nzOnOk",
+        "inputType": 1,
+        "description": "click ok callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date[]>",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "Date change callback",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date[]>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "DatePicker",
+    "description": "To select or input a date.",
+    "whenToUse": "By clicking the input box, you can select a date from a popup calendar.",
+    "doc": "https://ng.ant.design/components/date-picker/en"
+  },
+  {
+    "_idx": 6,
+    "type": "component",
+    "selector": "range-picker",
+    "properties": [],
+    "lib": "@delon/abc",
+    "title": "Data Range",
+    "description": "Based on the `nz-range-picker` further optimization, better service to start and end dates.",
+    "whenToUse": "",
+    "doc": "https://ng-alain.com/components/date-picker/en"
+  }
+]

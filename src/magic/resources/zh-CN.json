@@ -1,0 +1,849 @@
+[
+  {
+    "_idx": 255,
+    "type": "component",
+    "selector": "nz-date-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "是否显示清除按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "自动获取焦点",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "选择器 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "自定义日期单元格的内容（month-picker/year-picker不支持）",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "禁用",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "不可选择的日期（year-picker不支持）",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "国际化配置",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "控制弹层是否展开",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "额外的弹出日历样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "额外的弹出日历 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "自定义输入框样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "弹出日历和关闭日历的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "日期",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzDisabledTime",
+        "inputType": 0,
+        "description": "不可选择的时间",
+        "type": "function",
+        "typeRaw": "(current: Date) => { nzDisabledHours, nzDisabledMinutes, nzDisabledSeconds }",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "展示的日期格式，配置参考 [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM-dd\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "在面板中添加额外的页脚",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzShowTime",
+        "inputType": 0,
+        "description": "增加时间选择功能",
+        "type": "string",
+        "typeRaw": "object / boolean",
+        "default": "[TimePicker Options](/components/time-picker/zh#api)"
+      },
+      {
+        "name": "nzShowToday",
+        "inputType": 0,
+        "description": "是否展示“今天”按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "输入框提示文字",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzOnOk",
+        "inputType": 1,
+        "description": "点击确定按钮的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "时间发生变化的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "日期选择框",
+    "description": "输入或选择日期的控件。",
+    "whenToUse": "当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。",
+    "doc": "https://ng.ant.design/components/date-picker/zh"
+  },
+  {
+    "_idx": 404,
+    "type": "component",
+    "selector": "nz-year-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "是否显示清除按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "自动获取焦点",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "选择器 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "自定义日期单元格的内容（month-picker/year-picker不支持）",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "禁用",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "不可选择的日期（year-picker不支持）",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "国际化配置",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "控制弹层是否展开",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "额外的弹出日历样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "额外的弹出日历 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "自定义输入框样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "弹出日历和关闭日历的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "日期",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "展示的日期格式，配置参考 [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "在面板中添加额外的页脚",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "输入框提示文字",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "时间发生变化的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "日期选择框",
+    "description": "输入或选择日期的控件。",
+    "whenToUse": "当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。",
+    "doc": "https://ng.ant.design/components/date-picker/zh"
+  },
+  {
+    "_idx": 497,
+    "type": "component",
+    "selector": "nz-month-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "是否显示清除按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "自动获取焦点",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "选择器 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "自定义日期单元格的内容（month-picker/year-picker不支持）",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "禁用",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "不可选择的日期（year-picker不支持）",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "国际化配置",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "控制弹层是否展开",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "额外的弹出日历样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "额外的弹出日历 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "自定义输入框样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "弹出日历和关闭日历的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "日期",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "展示的日期格式，配置参考 [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM\""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "在面板中添加额外的页脚",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "输入框提示文字",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "时间发生变化的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "日期选择框",
+    "description": "输入或选择日期的控件。",
+    "whenToUse": "当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。",
+    "doc": "https://ng.ant.design/components/date-picker/zh"
+  },
+  {
+    "_idx": 590,
+    "type": "component",
+    "selector": "nz-week-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "是否显示清除按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "自动获取焦点",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "选择器 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "自定义日期单元格的内容（month-picker/year-picker不支持）",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "禁用",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "不可选择的日期（year-picker不支持）",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "国际化配置",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "控制弹层是否展开",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "额外的弹出日历样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "额外的弹出日历 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "自定义输入框样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "弹出日历和关闭日历的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "日期",
+        "type": "Date",
+        "typeRaw": "Date",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "展示的日期格式，配置参考 [DatePipe](https://angular.io/api/common/DatePipe)",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-ww\""
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "输入框提示文字",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "时间发生变化的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "日期选择框",
+    "description": "输入或选择日期的控件。",
+    "whenToUse": "当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。",
+    "doc": "https://ng.ant.design/components/date-picker/zh"
+  },
+  {
+    "_idx": 669,
+    "type": "component",
+    "selector": "nz-range-picker",
+    "properties": [
+      {
+        "name": "nzAllowClear",
+        "inputType": 0,
+        "description": "是否显示清除按钮",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "nzAutoFocus",
+        "inputType": 0,
+        "description": "自动获取焦点",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzClassName",
+        "inputType": 0,
+        "description": "选择器 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "''"
+      },
+      {
+        "name": "nzDateRender",
+        "inputType": 0,
+        "description": "自定义日期单元格的内容（month-picker/year-picker不支持）",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef&lt;Date&gt; / string or (d: Date) => TemplateRef&lt;Date&gt; / string",
+        "default": ""
+      },
+      {
+        "name": "nzDisabled",
+        "inputType": 0,
+        "description": "禁用",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "nzDisabledDate",
+        "inputType": 0,
+        "description": "不可选择的日期（year-picker不支持）",
+        "type": "function",
+        "typeRaw": "(current: Date) => boolean",
+        "default": ""
+      },
+      {
+        "name": "nzLocale",
+        "inputType": 0,
+        "description": "国际化配置",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "[默认配置](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json)"
+      },
+      {
+        "name": "nzOpen",
+        "inputType": 0,
+        "description": "控制弹层是否展开",
+        "type": "boolean",
+        "typeRaw": "boolean",
+        "default": ""
+      },
+      {
+        "name": "nzPopupStyle",
+        "inputType": 0,
+        "description": "额外的弹出日历样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzDropdownClassName",
+        "inputType": 0,
+        "description": "额外的弹出日历 className",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzSize",
+        "inputType": 0,
+        "description": "输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px",
+        "type": "string",
+        "typeRaw": "string",
+        "default": ""
+      },
+      {
+        "name": "nzStyle",
+        "inputType": 0,
+        "description": "自定义输入框样式",
+        "type": "string",
+        "typeRaw": "object",
+        "default": "{}"
+      },
+      {
+        "name": "nzOnOpenChange",
+        "inputType": 1,
+        "description": "弹出日历和关闭日历的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<boolean>",
+        "default": ""
+      },
+      {
+        "name": "ngModel",
+        "inputType": 2,
+        "description": "日期",
+        "type": "string",
+        "typeRaw": "Date[]",
+        "default": ""
+      },
+      {
+        "name": "nzDisabledTime",
+        "inputType": 0,
+        "description": "不可选择的时间",
+        "type": "function",
+        "typeRaw": "(current: Date, partial: 'start' / 'end') => { nzDisabledHours, nzDisabledMinutes, nzDisabledSeconds }",
+        "default": ""
+      },
+      {
+        "name": "nzFormat",
+        "inputType": 0,
+        "description": "展示的日期格式",
+        "type": "string",
+        "typeRaw": "string",
+        "default": "\"yyyy-MM-dd\""
+      },
+      {
+        "name": "nzRanges",
+        "inputType": 0,
+        "description": "预设时间范围快捷选择",
+        "type": "object",
+        "typeRaw": "{ [ key: string ]: Date[] }",
+        "default": ""
+      },
+      {
+        "name": "nzRenderExtraFooter",
+        "inputType": 0,
+        "description": "在面板中添加额外的页脚",
+        "type": "TemplateRef",
+        "typeRaw": "TemplateRef / string or () => TemplateRef / string",
+        "default": ""
+      },
+      {
+        "name": "nzShowTime",
+        "inputType": 0,
+        "description": "增加时间选择功能",
+        "type": "string",
+        "typeRaw": "object / boolean",
+        "default": "[TimePicker Options](/components/time-picker/zh#api)"
+      },
+      {
+        "name": "nzPlaceHolder",
+        "inputType": 0,
+        "description": "输入框提示文字",
+        "type": "string",
+        "typeRaw": "string[]",
+        "default": ""
+      },
+      {
+        "name": "nzOnOk",
+        "inputType": 1,
+        "description": "点击确定按钮的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date[]>",
+        "default": ""
+      },
+      {
+        "name": "ngModelChange",
+        "inputType": 1,
+        "description": "时间发生变化的回调",
+        "type": "EventEmitter",
+        "typeRaw": "EventEmitter<Date[]>",
+        "default": ""
+      }
+    ],
+    "lib": "ng-zorro-antd",
+    "title": "日期选择框",
+    "description": "输入或选择日期的控件。",
+    "whenToUse": "当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。",
+    "doc": "https://ng.ant.design/components/date-picker/zh"
+  },
+  {
+    "_idx": 6,
+    "type": "component",
+    "selector": "range-picker",
+    "properties": [],
+    "lib": "@delon/abc",
+    "title": "日期范围",
+    "description": "基于 `nz-range-picker` 进一步优化，更好的服务于开始与结束日期。",
+    "whenToUse": "",
+    "doc": "https://ng-alain.com/components/date-picker/zh"
+  }
+]

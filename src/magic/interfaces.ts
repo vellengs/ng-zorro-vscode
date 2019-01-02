@@ -3,6 +3,11 @@ export const NAME = `ng-zorro-vscode`;
 export type DirectiveType = 'component' | 'directive';
 
 export interface Directive {
+  _idx?: number;
+  /**
+   * e.g: `ng-zorro-antd`, `@delon/abc`
+   */
+  lib?: string;
   type: DirectiveType;
   /**
    * Component selector, e.g: `nz-button`
@@ -43,7 +48,7 @@ export interface DirectiveProperty {
    */
   description?: string;
 
-  type?: 'string' | 'TemplateRef' | 'boolean' | 'number' | 'object' | 'Date' | 'function' | 'HTMLElement' | 'EventEmitter';
+  type?: 'string' | 'TemplateRef' | 'boolean' | 'number' | 'Array' | 'Enum' | 'object' | 'Date' | 'function' | 'HTMLElement' | 'EventEmitter';
 
   typeRaw?: string;
   /**

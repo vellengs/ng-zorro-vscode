@@ -1,9 +1,7 @@
 import { Directive, DirectiveType, Tag, NAME } from '../interfaces';
 import { i18n } from './local';
-import { default as zh_CN_Delon } from './zh-CN/delon';
-import { default as zh_CN_Zorro } from './zh-CN/ng-zorro-antd';
-import { default as en_US_Delon } from './en-US/delon';
-import { default as en_US_Zorro } from './en-US/ng-zorro-antd';
+import zh_CN from './zh-CN.json';
+import en_US from './en-US.json';
 import { workspace } from 'vscode';
 import Notifier from '../notifier';
 import { readFileSync, existsSync } from 'fs';
@@ -56,20 +54,13 @@ export async function INIT(notifier: Notifier) {
     }
   }
 
+  const data = (CONFIG.language === 'en-US' ? en_US : zh_CN) as Directive[];
   if (CONFIG.isAntd) {
-    if (CONFIG.language === 'en-US') {
-      RESOURCES.push(...en_US_Zorro as any);
-    } else {
-      RESOURCES.push(...zh_CN_Zorro as any);
-    }
+    RESOURCES.push(...data.filter(i => i.lib === 'ng-zorro-antd'));
   }
 
   if (CONFIG.isAlain) {
-    if (CONFIG.language === 'en-US') {
-      RESOURCES.push(...en_US_Delon as any);
-    } else {
-      RESOURCES.push(...zh_CN_Delon as any);
-    }
+    RESOURCES.push(...data.filter(i => i.lib !== 'ng-zorro-antd'));
   }
 
   RESOURCES.forEach(i => {
@@ -127,6 +118,7 @@ export function genComponentMarkdown(item: Directive | string): string {
   if (item == null) return '';
 
   const rows: string[] = [
+    `**${i18n('library')}** ${item.lib}`,
     `**${item.title}**`,
     item.description
   ];
